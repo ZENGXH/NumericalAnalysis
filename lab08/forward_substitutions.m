@@ -1,0 +1,15 @@
+function [ y ] = forward_substitutions( L, b )
+% FORWARD_SUBSTITUTIONS solve the linear system L y = b by means of the
+% forward subsitutions algorithm; L must be a lower triangular matrix
+%  [ y ] = forward_substitutions( L, b )
+%  Inputs: L = lower triangular matrix (square matrix)
+%          b = vector (right hand side of the linear system)
+%  Output: y = solution vector (column vector)
+%
+y(1) = b(1) / L(1,1);
+for i = 2 : length(b)
+        sumA = sum( L(i,1:i-1) .* y(1:i-1) );
+    y(i) = 1 / L(i,i) * (b(i) - sumA);
+end
+y = y';
+return 
